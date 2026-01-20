@@ -57,7 +57,7 @@ function getPage() {
     const params = new URLSearchParams(window.location.search);
     const urlPage = params.get('p');
     if (urlPage) return parseInt(urlPage);
-    return parseInt(getCookie('page')) || 1;
+    return 1;
 }
 
 function updateState(lang, postId, page = 1) {
@@ -75,10 +75,8 @@ function updateState(lang, postId, page = 1) {
         newUrl.searchParams.delete('post');
         if (page > 1) {
             newUrl.searchParams.set('p', page);
-            setCookie('page', page, 30);
         } else {
             newUrl.searchParams.delete('p');
-            setCookie('page', 1, 30);
         }
     }
     
