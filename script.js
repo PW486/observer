@@ -86,6 +86,11 @@ function render(postId, page) {
     document.getElementById('footer-text').textContent = common.footerText;
     document.documentElement.lang = currentLang;
 
+    // Default SEO
+    document.title = common.siteTitle;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', texts.loading);
+
     document.querySelectorAll('nav button').forEach(btn => {
         if (btn.dataset.lang === currentLang) {
             btn.classList.add('active');
@@ -216,6 +221,20 @@ async function loadPost(postId, container, texts, page) {
         if (!response.ok) throw new Error("Post not found");
         const markdown = await response.text();
         document.getElementById('post-content').innerHTML = marked.parse(markdown);
+
+        // Update Dynamic SEO
+        const postTitle = document.querySelector('#post-content h1')?.textContent;
+        const firstPara = document.querySelector('#post-content p')?.textContent;
+        
+        if (postTitle) {
+            document.title = `${postTitle} | ${config.common.siteTitle}`;
+        }
+        
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && firstPara) {
+            metaDesc.setAttribute('content', firstPara.substring(0, 160) + '...');
+        }
+        
     } catch (error) {
         document.getElementById('post-content').innerHTML = `<p class="meta">Post not found or error loading.</p>`;
     }
