@@ -30,8 +30,8 @@ def get_sortable_date(date_str):
         pass
         
     try:
-        clean_date = re.sub(r'[년월일]', '', date_str).replace(' ', '-')
-        match = re.search(r'(\d{4})\s*(\d{1,2})\s*(\d{1,2})', date_str)
+        # Match YYYY년 M월 D일
+        match = re.search(r'(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일', date_str)
         if match:
             return datetime(int(match.group(1)), int(match.group(2)), int(match.group(3)))
     except ValueError:
@@ -66,15 +66,15 @@ def main():
         title, date_str = parse_md_file(filepath)
         
         if post_id not in posts_map:
-            posts_map[post_id] = {'id': post_id, 'title': {}, 'date': '', '_sort_date': datetime.min}
+            posts_map[post_id] = {'id': post_id, 'title': {}, 'date': {}, '_sort_date': datetime.min}
             
         posts_map[post_id]['title'][lang] = title
+        posts_map[post_id]['date'][lang] = date_str
         
         if lang == 'en':
-            posts_map[post_id]['date'] = date_str
             posts_map[post_id]['_sort_date'] = get_sortable_date(date_str)
-        elif not posts_map[post_id]['date']:
-            posts_map[post_id]['date'] = date_str 
+        elif posts_map[post_id]['_sort_date'] == datetime.min:
+            posts_map[post_id]['_sort_date'] = get_sortable_date(date_str)
 
     posts_list = list(posts_map.values())
     posts_list.sort(key=lambda x: x['_sort_date'], reverse=True)

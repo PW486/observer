@@ -3,29 +3,38 @@ const config = {
     common: {
         siteTitle: "The Quiet Observer",
         siteSubtitle: "Philosophy & Thoughts",
-        footerText: "© 2025 The Quiet Observer."
+        footerText: "© 2026 The Quiet Observer."
     },
     texts: {
         en: {
             backButton: "← Back to List",
             readMore: "Read Essay",
-            loading: "Loading..."
+            loading: "Loading...",
+            prev: "<",
+            next: ">",
+            first: "«",
+            last: "»"
         },
         ko: {
             backButton: "← 목록으로",
             readMore: "에세이 읽기",
-            loading: "로딩 중..."
+            loading: "로딩 중...",
+            prev: "<",
+            next: ">",
+            first: "«",
+            last: "»"
         }
     },
-    posts: [] // Will be loaded from posts.json
+    posts: [],
+    postsPerPage: 10,
+    pagesPerGroup: 5
 };
 
 // State
 let currentLang = 'en';
 
 function getLanguage() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('lang') === 'ko' ? 'ko' : 'en';
+    return getCookie('lang') || 'en';
 }
 
 function getPostId() {
@@ -33,31 +42,50 @@ function getPostId() {
     return params.get('post');
 }
 
-function updateState(lang, postId) {
-    const newUrl = new URL(window.location);
-    newUrl.searchParams.set('lang', lang);
-    if (postId) {
-        newUrl.searchParams.set('post', postId);
-    } else {
-        newUrl.searchParams.delete('post');
-    }
-    window.history.pushState({}, '', newUrl);
-    
-    currentLang = lang;
-    render(postId);
+function getPage() {
+    const params = new URLSearchParams(window.location.search);
+    const urlPage = params.get('p');
+    if (urlPage) return parseInt(urlPage);
+    return parseInt(getCookie('page')) || 1;
 }
 
-function render(postId) {
+function updateState(lang, postId, page = 1) {
+    const newUrl = new URL(window.location);
+    if (lang !== currentLang) {
+        setCookie('lang', lang, 365);
+        currentLang = lang;
+    }
+    
+    if (postId) {
+        newUrl.searchParams.set('post', postId);
+        if (page > 1) newUrl.searchParams.set('p', page);
+        else newUrl.searchParams.delete('p');
+    } else {
+        newUrl.searchParams.delete('post');
+        if (page > 1) {
+            newUrl.searchParams.set('p', page);
+            setCookie('page', page, 30);
+        } else {
+            newUrl.searchParams.delete('p');
+            setCookie('page', 1, 30);
+        }
+    }
+    
+    newUrl.searchParams.delete('lang');
+    window.history.pushState({}, '', newUrl);
+    window.scrollTo(0, 0);
+    render(postId, page);
+}
+
+function render(postId, page) {
     const texts = config.texts[currentLang];
     const common = config.common;
     
-    // Update Header/Footer
     document.getElementById('site-title').textContent = common.siteTitle;
     document.getElementById('site-subtitle').textContent = common.siteSubtitle;
     document.getElementById('footer-text').textContent = common.footerText;
     document.documentElement.lang = currentLang;
 
-    // Update Language Buttons
     document.querySelectorAll('nav button').forEach(btn => {
         if (btn.dataset.lang === currentLang) {
             btn.classList.add('active');
@@ -66,69 +94,128 @@ function render(postId) {
         }
     });
 
-    const main = document.querySelector('main');
+    const container = document.getElementById('post-container');
+    const paginationContainer = document.getElementById('pagination');
     
     if (postId) {
-        // Render Single Post
-        loadPost(postId, main, texts);
+        paginationContainer.style.display = 'none';
+        loadPost(postId, container, texts, page);
     } else {
-        // Render List
-        renderList(main, texts);
+        paginationContainer.style.display = 'flex';
+        renderList(container, paginationContainer, texts, page);
     }
 }
 
-function renderList(container, texts) {
+function renderList(container, paginationContainer, texts, page) {
     if (config.posts.length === 0) {
         container.innerHTML = `<div id="loading">${texts.loading}</div>`;
+        paginationContainer.innerHTML = '';
         return;
     }
 
-    let html = `<div class="post-list">`;
+    const totalPages = Math.ceil(config.posts.length / config.postsPerPage);
+    const currentPage = Math.max(1, Math.min(page, totalPages));
     
-    config.posts.forEach(post => {
-        // Fallback for title if translation missing
+    const start = (currentPage - 1) * config.postsPerPage;
+    const end = start + config.postsPerPage;
+    const pagedPosts = config.posts.slice(start, end);
+
+    let html = `<div class="post-list">`;
+    pagedPosts.forEach(post => {
         const title = post.title[currentLang] || post.title['en'];
-        const url = `?lang=${currentLang}&post=${post.id}`;
+        const date = post.date[currentLang] || post.date['en'];
+        const url = `?post=${post.id}&p=${currentPage}`;
         
         html += `
             <a href="${url}" class="post-item" data-id="${post.id}">
-                <div class="post-date">${post.date}</div>
+                <div class="post-date">${date}</div>
                 <h2 class="post-title">${title}</h2>
                 <div class="read-more">${texts.readMore} &rarr;</div>
             </a>
         `;
     });
-    
     html += `</div>`;
     container.innerHTML = html;
 
-    // Attach click events to post items
     container.querySelectorAll('.post-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            updateState(currentLang, item.dataset.id);
+            updateState(currentLang, item.dataset.id, currentPage);
+        });
+    });
+
+    renderPagination(paginationContainer, totalPages, currentPage, texts);
+}
+
+function renderPagination(container, totalPages, currentPage, texts) {
+    if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+
+    const icons = {
+        first: `<svg viewBox="0 0 24 24"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>`,
+        prev: `<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>`,
+        next: `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>`,
+        last: `<svg viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>`
+    };
+
+    const currentGroup = Math.ceil(currentPage / config.pagesPerGroup);
+    const startPage = (currentGroup - 1) * config.pagesPerGroup + 1;
+    const endPage = Math.min(startPage + config.pagesPerGroup - 1, totalPages);
+
+    let html = '';
+    
+    // First Group Button (<<)
+    if (totalPages > config.pagesPerGroup) {
+        html += `<button ${currentPage === 1 ? 'disabled' : ''} data-page="1" title="First Page">${icons.first}</button>`;
+    }
+
+    // Prev Page Button (<)
+    html += `<button ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}" title="Previous Page">${icons.prev}</button>`;
+    
+    // Page Numbers in Group
+    for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    
+    // Next Page Button (>)
+    html += `<button ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}" title="Next Page">${icons.next}</button>`;
+
+    // Last Group Button (>>)
+    if (totalPages > config.pagesPerGroup) {
+        html += `<button ${currentPage === totalPages ? 'disabled' : ''} data-page="${totalPages}" title="Last Page">${icons.last}</button>`;
+    }
+    
+    container.innerHTML = html;
+
+    container.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.dataset.page) {
+                updateState(currentLang, null, parseInt(btn.dataset.page));
+            }
         });
     });
 }
 
-async function loadPost(postId, container, texts) {
+async function loadPost(postId, container, texts, page) {
     container.innerHTML = `
-        <button class="back-btn" onclick="updateState('${currentLang}', null)">${texts.backButton}</button>
+        <button class="back-btn" id="btn-back">${texts.backButton}</button>
         <article id="post-content">
             <div id="loading">${texts.loading}</div>
         </article>
     `;
+
+    document.getElementById('btn-back').addEventListener('click', () => {
+        updateState(currentLang, null, page);
+    });
     
     try {
         const fileName = `posts/${postId}.${currentLang}.md`;
         const response = await fetch(fileName);
-        
         if (!response.ok) throw new Error("Post not found");
-        
         const markdown = await response.text();
-
         document.getElementById('post-content').innerHTML = marked.parse(markdown);
-        
     } catch (error) {
         document.getElementById('post-content').innerHTML = `<p class="meta">Post not found or error loading.</p>`;
     }
@@ -136,25 +223,22 @@ async function loadPost(postId, container, texts) {
 
 async function init() {
     try {
-        // 1. Fetch Post List
         const response = await fetch('posts.json');
         config.posts = await response.json();
     } catch (e) {
         console.error("Failed to load posts.json", e);
     }
 
-    // 2. Theme Initialization
     initTheme();
 
-    // 3. Initial Render
     currentLang = getLanguage();
     const postId = getPostId();
-    render(postId);
+    const page = getPage();
+    render(postId, page);
 
-    // 4. Event Listeners
-    document.getElementById('site-title').addEventListener('click', () => updateState(currentLang, null));
-    document.getElementById('btn-en').addEventListener('click', () => updateState('en', getPostId()));
-    document.getElementById('btn-ko').addEventListener('click', () => updateState('ko', getPostId()));
+    document.getElementById('site-title').addEventListener('click', () => updateState(currentLang, null, 1));
+    document.getElementById('btn-en').addEventListener('click', () => updateState('en', getPostId(), getPage()));
+    document.getElementById('btn-ko').addEventListener('click', () => updateState('ko', getPostId(), getPage()));
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 }
 
@@ -170,7 +254,6 @@ function initTheme() {
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
     document.documentElement.setAttribute('data-theme', newTheme);
     setCookie('theme', newTheme, 365);
 }
@@ -195,8 +278,7 @@ function getCookie(name) {
 
 window.addEventListener('popstate', () => {
     currentLang = getLanguage();
-    render(getPostId());
+    render(getPostId(), getPage());
 });
 
-// Start
 document.addEventListener('DOMContentLoaded', init);
