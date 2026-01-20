@@ -1,6 +1,6 @@
 # The Value of Small Talk
 
-###### January 01, 2026
+###### January 14, 2019
 
 We often dismiss small talk as shallow, tedious, or entirely meaningless. We complain about the perceived obligation to discuss the weather, current events, or our weekend plans, wishing we could skip straight to the "deep" and "significant" conversations. We treat these brief exchanges as social chores to be rushed through. However, small talk serves a vital and often overlooked purpose in the delicate architecture of human connection: it is the necessary bridge that leads to deeper understanding and psychological safety.
 

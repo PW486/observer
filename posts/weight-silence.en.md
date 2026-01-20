@@ -1,6 +1,6 @@
 # The Hidden Depth of Silence
 
-###### September 09, 2023
+###### May 25, 2019
 
 We live in a world that never stops talking. From the moment we wake up, we are greeted by a chorus of notifications, news, and the constant hum of opinions. It feels as though if we are not adding our own voice to the noise, we are somehow falling behind or becoming invisible. We treat silence as a void to be filled, a gap in the conversation that must be patched as quickly as possible.
 

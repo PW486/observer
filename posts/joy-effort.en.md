@@ -1,6 +1,6 @@
 # Finding Joy in Effort
 
-###### January 30, 2023
+###### August 18, 2021
 
 We live in a culture that is obsessively focused on results. We celebrate the finish line, the trophy, the final product, and the paycheck, often treating the work itself as a necessary evil—something to be rushed through as quickly as possible so that we can reach the reward. However, when we only value the outcome, we miss out on the deep and lasting satisfaction that can only be found in the process of doing.
 

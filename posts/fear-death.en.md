@@ -1,6 +1,6 @@
 # Why Death Makes Life Worth Living
 
-###### January 09, 2024
+###### June 27, 2018
 
 Death is often treated as the ultimate tragedy, the dark shadow that haunts our happiest moments. We spend much of our time trying to ignore it, to hide from it, or to delay its arrival as much as possible. We view mortality as a flaw in our existence, a cruel ending to a beautiful story. But when we look closer, we find a strange and profound truth: it is the very fact of our mortality that gives our lives their flavor, their urgency, and their depth.
 

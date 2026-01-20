@@ -1,6 +1,6 @@
 # The Limits and Possibilities of Empathy
 
-###### October 13, 2024
+###### May 27, 2021
 
 We often treat empathy as an unlimited resource—a universal bridge that allows us to feel exactly what another person is feeling. We are encouraged to "put ourselves in someone else's shoes," believing that if we just try hard enough, we can fully understand their internal landscape. While empathy is a vital human capacity, it is important to recognize its inherent limits. We can never truly occupy the consciousness of another; we can only imagine it through the lens of our own experiences.
 

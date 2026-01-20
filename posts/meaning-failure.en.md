@@ -1,6 +1,6 @@
 # Finding Meaning in Failure
 
-###### March 31, 2023
+###### November 10, 2019
 
 Our culture is relentlessly obsessed with success stories. We celebrate the final achievement, the winning moment, and the flawless performance, often treating failure as a source of deep shame—something to be hidden, quickly forgotten, or explained away. But by avoiding failure at all costs, we are also inadvertently avoiding the most powerful engine of growth, innovation, and self-discovery that we possess. We become stagnant in our pursuit of safety.
 

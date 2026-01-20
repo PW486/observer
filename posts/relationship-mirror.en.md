@@ -1,6 +1,6 @@
 # The Mirror of Relationships
 
-###### December 27, 2023
+###### April 30, 2021
 
 We often think of our relationships as something external to ourselves—a series of bridges connecting us to other people. However, our interactions with others act more like a complex system of mirrors, reflecting back parts of our own character, our history, and our hidden wounds that we might otherwise never see. The people we are closest to often reveal our greatest strengths, our deepest fears, and our most unresolved internal conflicts.
 

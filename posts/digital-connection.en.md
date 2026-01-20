@@ -1,6 +1,6 @@
 # Connection in a Digital Age
 
-###### August 11, 2024
+###### October 04, 2024
 
 Never before have we been so technically connected, yet many of us feel more profoundly alone than ever. We spend our days sending messages, scrolling through feeds, and reacting to posts, but these interactions often leave us feeling strangely hollow. We are confusing the speed of communication with the depth of human connection, and the number of our followers with the quality of our relationships.
 

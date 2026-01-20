@@ -1,6 +1,6 @@
 # Slow Breathing in a Fast World
 
-###### March 02, 2023
+###### August 29, 2021
 
 The world around us seems to be moving faster every day. We are encouraged to multitask, to respond instantly, and to fill every spare second with some form of digital consumption or productive activity. We have come to associate speed with progress and stillness with laziness or stagnation. But in this frantic rush to get ahead, we are often losing our vital connection to the present moment and to our own inner calm.
 
