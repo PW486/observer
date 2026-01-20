@@ -12,8 +12,8 @@ A minimalist, philosophy blog designed for deep reflection and quiet reading.
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/PW486/the-quiet-observer.git
-   cd the-quiet-observer
+   git clone https://github.com/PW486/observer.git
+   cd observer
    ```
 
 2. **Start a local server**:
