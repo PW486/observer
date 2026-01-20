@@ -2,14 +2,6 @@
 
 A minimalist, bilingual (English & Korean) philosophy blog designed for deep reflection and quiet reading.
 
-## ✨ Features
-
-- **Bilingual Support**: Seamlessly toggle between English and Korean versions of every post.
-- **Markdown-Driven**: Write posts in simple Markdown; the build system handles the rest.
-- **Dynamic Loading**: Posts are fetched and rendered on-the-fly for a fast, modern feel.
-- **Clean Aesthetic**: A distraction-free UI focused on typography and content.
-- **Static Deployment**: Optimized for GitHub Pages with a simple Python-based build process.
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -47,12 +39,6 @@ A minimalist, bilingual (English & Korean) philosophy blog designed for deep ref
    python3 build.py
    ```
    This updates `posts.json`, which the frontend uses to list and load content.
-
-## 🛠️ Built With
-
-- **Frontend**: Vanilla JavaScript, HTML5, CSS3
-- **Build Tool**: Python 3
-- **Hosting**: GitHub Pages
 
 ---
 
