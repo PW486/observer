@@ -527,8 +527,8 @@ footer {
     /* Ensure post titles and headers don't explode on mobile landscape */
     @media screen and (max-height: 450px) {
     header {
-        padding-top: 20px;
-        padding-bottom: 15px;
+        padding-top: 25px;
+        padding-bottom: 30px;
     }
 
     h1 {
