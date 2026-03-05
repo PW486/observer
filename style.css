@@ -9,6 +9,12 @@
     --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 [data-theme="dark"] {
     --bg-color: #1a1a1a;
     --text-color: #e0e0e0;
@@ -451,4 +457,78 @@ footer {
         padding: 15px;
         margin-bottom: 10px;
     }
-}
+    }
+
+    /* Additional Landscape & Mobile Fine-tuning */
+    @media screen and (max-width: 950px) and (orientation: landscape) {
+    header {
+        padding: 30px 15px 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    nav {
+        margin-top: 15px;
+        gap: 8px;
+    }
+
+    main {
+        padding: 20px 0;
+    }
+
+    .post-list {
+        gap: 0;
+    }
+
+    .post-item {
+        padding: 20px 15px;
+    }
+
+    .post-title {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+
+    article h1 {
+        font-size: 1.8rem;
+        padding: 0 15px;
+    }
+
+    article h6 {
+        margin-bottom: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    }
+
+    /* Ensure post titles and headers don't explode on mobile landscape */
+    @media screen and (max-height: 450px) {
+    header {
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .post-title {
+        font-size: 1.2rem;
+    }
+
+    article h1 {
+        font-size: 1.5rem;
+    }
+    }
