@@ -466,17 +466,18 @@ footer {
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 2.0rem;
     }
 
     .subtitle {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         letter-spacing: 1px;
     }
 
     nav {
         margin-top: 15px;
         gap: 8px;
+        font-size: 0.9rem;
     }
 
     main {
@@ -491,13 +492,21 @@ footer {
         padding: 20px 0;
     }
 
+    .post-date {
+        font-size: 0.9rem;
+    }
+
     .post-title {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         margin-bottom: 5px;
     }
 
+    .read-more {
+        font-size: 1.0rem;
+    }
+
     article h1 {
-        font-size: 1.8rem;
+        font-size: 2.0rem;
         padding: 0;
     }
 
