@@ -461,6 +461,19 @@ footer {
 
     /* Additional Landscape & Mobile Fine-tuning */
     @media screen and (max-width: 950px) and (orientation: landscape) {
+    header {
+        padding-bottom: 40px;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav button {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+
     main {
         padding: 20px 15px;
     }
