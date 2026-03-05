@@ -462,33 +462,34 @@ footer {
     /* Additional Landscape & Mobile Fine-tuning */
     @media screen and (max-width: 950px) and (orientation: landscape) {
     header {
-        padding: 40px 15px 30px;
+        padding: 50px 15px 40px;
     }
 
     h1 {
-        font-size: 2.0rem;
+        font-size: 2.2rem;
+        margin-bottom: 15px;
     }
 
     .subtitle {
-        font-size: 0.9rem;
-        letter-spacing: 1px;
+        font-size: 1.0rem;
+        letter-spacing: 2px;
     }
 
     nav {
-        margin-top: 25px;
-        gap: 12px;
-        font-size: 1.0rem;
+        margin-top: 35px;
+        gap: 15px;
     }
 
     nav button {
-        padding: 10px 20px;
+        padding: 10px 22px;
+        font-size: 1.0rem;
     }
 
     #theme-toggle {
         margin-left: 20px;
-        width: 44px;
-        height: 44px;
-        font-size: 1.2rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
     }
 
     #theme-toggle::before {
