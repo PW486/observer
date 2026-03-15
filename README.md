@@ -1,6 +1,6 @@
 # The Quiet Observer 🏛️
 
-A minimalist sanctuary for deep philosophical thoughts, essays on life, and quiet observations. This project is built with a focus on high-quality content and a seamless, distraction-free reading experience.
+A sanctuary for deep philosophical thoughts, essays on life, and quiet observations in a fast-paced world. This project is built with a focus on high-quality content and a seamless, distraction-free reading experience.
 
 [View Live Blog](https://pw486.github.io/observer/)
 

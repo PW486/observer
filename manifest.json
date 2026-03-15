@@ -1,6 +1,7 @@
 {
     "name": "The Quiet Observer",
     "short_name": "Observer",
+    "description": "A sanctuary for deep philosophical thoughts, essays on life, and quiet observations in a fast-paced world.",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#fcfbf9",
